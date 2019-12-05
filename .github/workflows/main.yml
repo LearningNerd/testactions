@@ -24,7 +24,7 @@ jobs:
           EOF
     - name: install stuff
       run: |
-        echo "test"
+        echo $HEROKU_EMAIL
         ls
         npm install
         heroku --version
