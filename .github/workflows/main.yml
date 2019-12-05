@@ -12,19 +12,10 @@ jobs:
    env:
      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
      HEROKU_APP_NAME: testactions
-   steps:
+   steps: 
     # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow#using-the-checkout-action
     - uses: actions/checkout@v1.0.0
-    - name: save heroku credentials to file
-      run: | 
-          cat >~/.netrc <<EOF
-          machine api.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-          machine git.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-          EOF
+
     - name: install stuff
       run: |
         npm install
