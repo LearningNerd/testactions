@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-        - 
+
 # via https://github.com/AmericanAirlines/Hangar/commit/94ba0b8920659a623975377d71275285a65a2a83#diff-da4ee0d9a13a73c0e16c7b55acb219d7
 jobs:
   release:
