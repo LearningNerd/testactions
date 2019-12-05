@@ -24,17 +24,8 @@ jobs:
           EOF
     - name: install stuff
       run: |
-        echo "test"
-        ls
         npm install
         heroku --version
         git status
-        heroku login -i
-        $HEROKU_EMAIL
-        $HEROKU_API_KEY
         heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
-        git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
-        
-    - name: another test
-      run: |
-        echo "test 2"
+        git push heroku HEAD:master
