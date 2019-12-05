@@ -10,6 +10,8 @@ jobs:
   release:
    runs-on: ubuntu-latest
    steps:
+    # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow#using-the-checkout-action
+    - uses: actions/checkout@v1.0.0
     - name: save heroku credentials to file
       run: | 
           cat >~/.netrc <<EOF
