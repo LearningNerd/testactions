@@ -17,14 +17,14 @@ jobs:
           cat >~/.netrc <<EOF
           machine api.heroku.com
               login $HEROKU_EMAIL
-              password $HEROKU_LOGIN_API_KEY
+              password $HEROKU_API_KEY
           machine git.heroku.com
               login $HEROKU_EMAIL
-              password $HEROKU_LOGIN_API_KEY
+              password $HEROKU_API_KEY
           EOF
     - name: install stuff
       env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_LOGIN_API_KEY }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
         echo "test"
         ls
@@ -36,6 +36,6 @@ jobs:
         
     - name: another test
       env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_LOGIN_API_KEY }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
         echo "test 2"
