@@ -10,22 +10,17 @@ jobs:
   release:
    runs-on: ubuntu-latest
    steps:
-    - uses: actions/checkout@master
-    - name: login
-      uses: actions/heroku@master
+    - name: install stuff
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:login
-    - name: push
-      uses: actions/heroku@master
+      run: |
+        echo "test"
+        npm install
+        heroku --version
+        echo "hm"
+        
+    - name: another test
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:push -a testactions web
-    - name: release
-      uses: actions/heroku@master
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:release -a testactions web
+      run: |
+        echo "test 2"
