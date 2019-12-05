@@ -9,6 +9,9 @@ on:
 jobs:
   release:
    runs-on: ubuntu-latest
+   env:
+     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+     HEROKU_APP_NAME: testactions
    steps:
     # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow#using-the-checkout-action
     - uses: actions/checkout@v1.0.0
@@ -25,7 +28,5 @@ jobs:
     - name: install stuff
       run: |
         npm install
-        heroku --version
-        git status
-        heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
-        git push heroku HEAD:master
+        # heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
+        git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
