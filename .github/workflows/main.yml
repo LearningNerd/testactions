@@ -28,6 +28,7 @@ jobs:
         ls
         npm install
         heroku --version
+        cat ~/.netrc
         git status
         heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
         git push heroku HEAD:master
