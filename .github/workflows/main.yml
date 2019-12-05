@@ -4,37 +4,28 @@ on:
   push:
     branches:
       - master
+        - 
+# via https://github.com/AmericanAirlines/Hangar/commit/94ba0b8920659a623975377d71275285a65a2a83#diff-da4ee0d9a13a73c0e16c7b55acb219d7
 jobs:
-  build:
-    name: Nodejs
-    runs-on: ubuntu-latest
-    # environment variables for Heroku
-    env:
-      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      HEROKU_APP: testactions
-    steps:
-      - uses: actions/checkout@v1
-
-      # login to Heroku with Heroku API key
-      - name: Heroku login
-        uses: "actions/heroku@master"
-        with: 
-          args: "container:login"
-          secrets: |
-            $HEROKU_API_KEY
-
-      # push codes to Heroku
-      - name: Heroku push
-        uses: "actions/heroku@master"
-        with: 
-          args: "container:push -a $HEROKU_APP web"
-          secrets: |
-            $HEROKU_API_KEY
-
-      # release
-      - name: Heroku release
-        uses: "actions/heroku@master"
-        with: 
-          args: "container:release -a $HEROKU_APP web"
-          secrets: |
-            $HEROKU_API_KEY
+  release:
+   runs-on: ubuntu-latest
+   steps:
+    - uses: actions/checkout@master
+    - name: login
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:login
+    - name: push
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:push -a testactions web
+    - name: release
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:release -a testactions web
