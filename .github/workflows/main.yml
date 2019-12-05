@@ -30,7 +30,8 @@ jobs:
         ls
         npm install
         heroku --version
-        heroku git:remote -a $(basename $GITHUB_REPOSITORY)
+        git status
+        heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
         git push heroku master
         
     - name: another test
