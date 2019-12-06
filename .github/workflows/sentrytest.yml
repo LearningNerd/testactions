@@ -14,6 +14,7 @@ jobs:
      SENTRY_ORG: liz
      SENTRY_PROJECT: testactions
      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+     SENTRY_DEPLOY_ENVIRONMENT: heroku
 
    steps: 
     # See: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow#using-the-checkout-action
@@ -33,6 +34,7 @@ jobs:
         sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
         sentry-cli releases finalize $SENTRY_RELEASE
         sentry-cli releases set-commits --auto $SENTRY_RELEASE
+        sentry-cli releases deploys $SENTRY_RELEASE new -e $SENTRY_DEPLOY_ENVIRONMENT
         pwd
         heroku config:set SENTRY_RELEASE=$SENTRY_RELEASE -a ${{ secrets.HEROKU_APP_NAME }}
         pwd
