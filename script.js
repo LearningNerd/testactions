@@ -18,8 +18,8 @@ app.get('/', function rootHandler(req, res) {
 });
 
 app.get('/debug-sentry', function mainHandler(req, res) {
-  console.log("hit /debug-sentry");
-  throw new Error('My first Sentry error!');
+  console.log("hit /debug-sentry -- bug #2, will show up in a new release");
+  throw new Error('A second bug in the next release!');
 });
 
 // The error handler must be before any other error middleware and after all controllers
