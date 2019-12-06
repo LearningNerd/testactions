@@ -19,4 +19,4 @@ jobs:
       run: |
         npm install
         # heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
-        git push https://heroku:$HEROKU_API_KEY@git.heroku.com/${{ secrets.$HEROKU_APP_NAME }}.git HEAD:master
+        git push https://heroku:$HEROKU_API_KEY@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git HEAD:master
