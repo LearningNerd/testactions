@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+
 jobs:
   release:
    runs-on: ubuntu-latest
@@ -13,8 +14,11 @@ jobs:
      SENTRY_ORG: liz
      SENTRY_PROJECT: testactions
      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-     SENTRY_RELEASE: test222
+
    steps: 
+    # See: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/configuring-a-workflow#using-the-checkout-action
+    - uses: actions/checkout@v1.0.0
+
     - name: install sentry cli?
       run: |
         curl -sL https://sentry.io/get-cli/ | bash
@@ -23,6 +27,10 @@ jobs:
         echo $SENTRY_PROJECT
         sentry-cli info
         pwd
+        npm install
+        SENTRY_RELEASE=$(sentry-cli releases propose-version)
+        echo $SENTRY_RELEASE
         sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
         sentry-cli releases finalize $SENTRY_RELEASE
+        sentry-cli releases set-commits --auto $SENTRY_RELEASE
         heroku config:set SENTRY_RELEASE=$SENTRY_RELEASE -a ${{ secrets.HEROKU_APP_NAME }}
