@@ -18,8 +18,8 @@ app.get('/', function rootHandler(req, res) {
 });
 
 app.get('/debug-sentry', function mainHandler(req, res) {
-  console.log("hit /debug-sentry -- bug #2, will show up in a new release");
-  throw new Error('A second bug in the next release!');
+  console.log("hit /debug-sentry");
+  throw new Error('A THIRD bug in the next release now that deploys are linked to releases!');
 });
 
 // The error handler must be before any other error middleware and after all controllers
@@ -30,9 +30,7 @@ app.use(function onError(err, req, res, next) {
   // The error id is attached to `res.sentry` to be returned
   // and optionally displayed to the user for support.
   res.statusCode = 500;
-  console.log(res);
   res.end(res.sentry + "\n");
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
-
