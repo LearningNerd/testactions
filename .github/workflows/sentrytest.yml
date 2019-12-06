@@ -14,9 +14,12 @@ jobs:
    steps: 
     - name: install sentry cli?
       run: |
-        curl -sL https://sentry.io/get-cli/ | bash
+#        curl -sL https://sentry.io/get-cli/ | bash
+        npm install 
         echo $SENTRY_AUTH_TOKEN
         echo $SENTRY_ORG
         echo $SENTRY_PROJECT
         sentry-cli info
         pwd
+        heroku config:set SENTRY_ORG=$SENTRY_ORG
+        
