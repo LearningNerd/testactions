@@ -26,6 +26,4 @@ jobs:
         SENTRY_RELEASE=$(sentry-cli releases new $VERSION)
         sentry-cli releases new -p $SENTRY_PROJECT $VERSION
         sentry-cli releases finalize $VERSION
-        heroku config:set SENTRY_ORG=$SENTRY_ORG -a ${{ secrets.HEROKU_APP_NAME }}
-        heroku config:set SENTRY_DSN=$SENTRY_DSN -a ${{ secrets.HEROKU_APP_NAME }}
         heroku config:set SENTRY_RELEASE=$SENTRY_RELEASE -a ${{ secrets.HEROKU_APP_NAME }}
