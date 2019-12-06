@@ -13,7 +13,7 @@ jobs:
      SENTRY_ORG: liz
      SENTRY_PROJECT: testactions
      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-     VERSION: test123
+     SENTRY_RELEASE: test222
    steps: 
     - name: install sentry cli?
       run: |
@@ -23,7 +23,6 @@ jobs:
         echo $SENTRY_PROJECT
         sentry-cli info
         pwd
-        SENTRY_RELEASE=$(sentry-cli releases new $VERSION)
-        sentry-cli releases new -p $SENTRY_PROJECT $VERSION
-        sentry-cli releases finalize $VERSION
+        sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
+        sentry-cli releases finalize $SENTRY_RELEASE
         heroku config:set SENTRY_RELEASE=$SENTRY_RELEASE -a ${{ secrets.HEROKU_APP_NAME }}
