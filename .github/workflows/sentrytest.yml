@@ -14,9 +14,10 @@ jobs:
    steps: 
     - name: install sentry cli?
       run: |
+        pwd
         which sentry-cli
-        sentry-cli --version
-        curl -sL https://sentry.io/get-cli/ | bash
-        which sentry-cli
-        sentry-cli --version
-        sentry-cli info
+#        sentry-cli --version
+#        curl -sL https://sentry.io/get-cli/ | bash
+#        which sentry-cli
+#        sentry-cli --version
+#        sentry-cli info
