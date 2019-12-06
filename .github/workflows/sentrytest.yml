@@ -11,6 +11,7 @@ jobs:
      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
      SENTRY_ORG: liz
      SENTRY_PROJECT: round-robin
+     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
    steps: 
     - name: install sentry cli?
       run: |
