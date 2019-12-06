@@ -15,8 +15,6 @@ jobs:
     - name: install sentry cli?
       run: |
         curl -sL https://sentry.io/get-cli/ | bash
-#        sentry-cli --version
-#        which sentry-cli
         echo $SENTRY_AUTH_TOKEN
         echo $SENTRY_ORG
         echo $SENTRY_PROJECT
