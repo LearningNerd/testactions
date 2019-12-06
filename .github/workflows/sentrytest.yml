@@ -11,8 +11,9 @@ jobs:
      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
      SENTRY_DSN: https://40d39f91e8e74b5d887ff877a7b14961@sentry.io/1848428
      SENTRY_ORG: liz
-     SENTRY_PROJECT: round-robin
+     SENTRY_PROJECT: testactions
      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+     VERSION: test123
    steps: 
     - name: install sentry cli?
       run: |
@@ -21,5 +22,10 @@ jobs:
         echo $SENTRY_ORG
         echo $SENTRY_PROJECT
         sentry-cli info
-        pwd 
+        pwd
+        SENTRY_RELEASE=$(sentry-cli releases new $VERSION)
+        sentry-cli releases new -p $SENTRY_PROJECT $VERSION
+        sentry-cli releases finalize $VERSION
         heroku config:set SENTRY_ORG=$SENTRY_ORG -a ${{ secrets.HEROKU_APP_NAME }}
+        heroku config:set SENTRY_DSN=$SENTRY_DSN -a ${{ secrets.HEROKU_APP_NAME }}
+        heroku config:set SENTRY_RELEASE=$SENTRY_RELEASE -a ${{ secrets.HEROKU_APP_NAME }}
