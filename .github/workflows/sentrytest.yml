@@ -9,6 +9,7 @@ jobs:
    runs-on: ubuntu-latest
    env:
      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+     SENTRY_DSN: https://40d39f91e8e74b5d887ff877a7b14961@sentry.io/1848428
      SENTRY_ORG: liz
      SENTRY_PROJECT: round-robin
      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
