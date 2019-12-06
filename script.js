@@ -14,7 +14,7 @@ app.use(Sentry.Handlers.requestHandler());
 // All controllers should live here
 app.get('/', function rootHandler(req, res) {
   console.log("/ endpoint hit");
-  res.send('Here, have an env var from heroku: ' + process.env.SENTRY_ORG);
+  res.send('Here, have an env var from heroku: ' + process.env.SENTRY_ORG + ' and sentry release: ' + process.env.SENTRY_RELEASE);
 });
 
 app.get('/debug-sentry', function mainHandler(req, res) {
