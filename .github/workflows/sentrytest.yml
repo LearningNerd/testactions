@@ -1,0 +1,24 @@
+name: Test Sentry CLI
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  release:
+   runs-on: ubuntu-latest
+   env:
+     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+     SENTRY_ORG: liz
+     SENTRY_PROJECT: round-robin
+   steps: 
+    - name: install sentry cli?
+      run: |
+        which sentry-cli
+        sentry-cli --version
+        curl -sL https://sentry.io/get-cli/ | bash
+        which sentry-cli
+        sentry-cli --version
+        sentry-cli info
+        # heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
+        git push https://heroku:$HEROKU_API_KEY@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git HEAD:master
