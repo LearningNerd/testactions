@@ -14,8 +14,7 @@ jobs:
    steps: 
     - name: install sentry cli?
       run: |
-#        curl -sL https://sentry.io/get-cli/ | bash
-        npm install 
+        curl -sL https://sentry.io/get-cli/ | bash
         echo $SENTRY_AUTH_TOKEN
         echo $SENTRY_ORG
         echo $SENTRY_PROJECT
