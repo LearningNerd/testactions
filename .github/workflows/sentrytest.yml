@@ -33,4 +33,6 @@ jobs:
         sentry-cli releases new -p $SENTRY_PROJECT $SENTRY_RELEASE
         sentry-cli releases finalize $SENTRY_RELEASE
         sentry-cli releases set-commits --auto $SENTRY_RELEASE
+        pwd
         heroku config:set SENTRY_RELEASE=$SENTRY_RELEASE -a ${{ secrets.HEROKU_APP_NAME }}
+        pwd
