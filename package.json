@@ -19,6 +19,6 @@
   "homepage": "https://github.com/LearningNerd/testactions#readme",
   "dependencies": {
     "@sentry/node": "^5.10.1",
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   }
 }
